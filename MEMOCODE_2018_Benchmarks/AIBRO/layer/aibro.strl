@@ -1,0 +1,60 @@
+module aibro:
+
+% data handling declarations
+procedure runFrontSensorsLayer1()(integer, integer, integer);  % runs neural network A layer 1 in C
+procedure runFrontSensorsLayer2()();  % runs neural network A layer 2 in C
+procedure runSideSensorsLayer1()(integer, integer, integer, integer);  % runs neural network B layer 1 in C
+procedure runSideSensorsLayer2()();  % runs neural network B layer 2 in C
+procedure runDecisionLayer1()();  % runs neural network C layer 1 in C
+procedure runDecisionLayer2()();  % runs neural network C layer 2 in C
+
+function getAction(): integer;  % retrieves best action in C
+
+% interface declarations
+input A, B, R;
+input front1: integer, front2: integer, front3: integer;
+input side1: integer, side2: integer, side3: integer, side4: integer;
+output O: integer;
+
+% signals
+signal A2, B2 in
+
+[
+% main thread
+var out: integer in
+	loop
+		pause;
+		[
+			await A;
+			% run ANN A: interpret frontal scanner data
+			call runFrontSensorsLayer1()(?front1, ?front2, ?front3);
+			emit A2;
+			||
+			await pre(A2);
+			call runFrontSensorsLayer2()();
+			||
+			await B;
+			%run ANN B: interpret side scanner data
+			call runSideSensorsLayer1()(?side1, ?side2, ?side3, ?side4);
+			emit B2;
+			||
+			await pre(B2);
+			call runSideSensorsLayer2()();
+		];
+		
+		% run ANN C: decide on best course of action using interpretted input from A and B
+		call runDecisionLayer1()();
+
+		await tick;
+		call runDecisionLayer2()();
+
+		% fetch output action
+		out := getAction();
+
+		emit O(out);
+	each R
+end var
+]
+
+end signal
+end module

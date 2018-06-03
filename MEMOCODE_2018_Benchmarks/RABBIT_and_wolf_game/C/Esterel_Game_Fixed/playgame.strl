@@ -1,0 +1,59 @@
+module playgame:
+
+% data handling declarations
+procedure rabbit_decide()();
+procedure wolf1_decide()();
+procedure wolf2_decide()();
+
+procedure rabbit_move()();
+procedure wolf1_move()();
+procedure wolf2_move()();
+
+function check_score(): boolean;
+
+signal r_decide, w1_decide, w2_decide, done_decide, r_moved, w1_moved, w2_moved, done_rabbit, done_wolf1, done_wolf2 in
+
+trap T_MAIN in
+
+[
+% rabbit decision thread
+loop
+	pause;
+	[
+		call rabbit_decide()();
+		||
+		call wolf1_decide()();
+		||
+		call wolf2_decide()();
+	];
+
+	pause;
+
+	call rabbit_move()();
+	if check_score() then
+		exit T_MAIN;
+	else
+		emit done_rabbit;
+	end if;
+
+	call wolf1_move()();
+	if check_score() then
+		exit T_MAIN;
+	else
+		emit done_rabbit;
+	end if;
+
+	call wolf2_move()();
+	if check_score() then
+		exit T_MAIN;
+	else
+		emit done_rabbit;
+	end if;
+end loop
+]
+
+end trap
+
+end signal
+
+end module

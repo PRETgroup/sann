@@ -1,0 +1,61 @@
+[5, 4, 2]
+152678 -54703 116307 3261 41025 -59556 60233 -52324 -116607 42960 142483 136027 -49904 7697 -13360 -38906 -3902 95952 3163 -107486 50778 -183827 74461 -139334 
+131163 4783 132667 -115150 127079 -146405 125317 56381 27721 43101 
+152678, -54703, 116307, 3261, 41025, -59556, 60233, -52324, -116607, 42960, 142483, 136027, -49904, 7697, -13360, -38906, -3902, 95952, 3163, -107486, 50778, -183827, 74461, -139334, 
+131163, 4783, 132667, -115150, 127079, -146405, 125317, 56381, 27721, 43101, 
+NUMBER OF LAYERS: 3
+NUMBER OF INPUTS: 5
+NUMBER OF OUTPUTS: 2
+NEURONS PER LAYER: 5 -> 4 -> 2
+THIS NEURAL NETWORK HAS BIAS NEURONS
+ACTIVATION FUNCTION: TANH (SYMMETRIC SIGMOID), TANH (SYMMETRIC SIGMOID)]
+<============ Listing LAYER 0 ============>
+
+LAYER 0 NEURON 0 has 4 connections to LAYER 1:
+-> Connection to NEURON 0 in LAYER 1 has a WEIGHT of 2.329681 (152678)
+-> Connection to NEURON 1 in LAYER 1 has a WEIGHT of -0.908752 (-59556)
+-> Connection to NEURON 2 in LAYER 1 has a WEIGHT of 2.174118 (142483)
+-> Connection to NEURON 3 in LAYER 1 has a WEIGHT of -0.593658 (-38906)
+LAYER 0 NEURON 1 has 4 connections to LAYER 1:
+-> Connection to NEURON 0 in LAYER 1 has a WEIGHT of -0.834702 (-54703)
+-> Connection to NEURON 1 in LAYER 1 has a WEIGHT of 0.919083 (60233)
+-> Connection to NEURON 2 in LAYER 1 has a WEIGHT of 2.075607 (136027)
+-> Connection to NEURON 3 in LAYER 1 has a WEIGHT of -0.059540 (-3902)
+LAYER 0 NEURON 2 has 4 connections to LAYER 1:
+-> Connection to NEURON 0 in LAYER 1 has a WEIGHT of 1.774704 (116307)
+-> Connection to NEURON 1 in LAYER 1 has a WEIGHT of -0.798401 (-52324)
+-> Connection to NEURON 2 in LAYER 1 has a WEIGHT of -0.761475 (-49904)
+-> Connection to NEURON 3 in LAYER 1 has a WEIGHT of 1.464111 (95952)
+LAYER 0 NEURON 3 has 4 connections to LAYER 1:
+-> Connection to NEURON 0 in LAYER 1 has a WEIGHT of 0.049759 (3261)
+-> Connection to NEURON 1 in LAYER 1 has a WEIGHT of -1.779282 (-116607)
+-> Connection to NEURON 2 in LAYER 1 has a WEIGHT of 0.117447 (7697)
+-> Connection to NEURON 3 in LAYER 1 has a WEIGHT of 0.048264 (3163)
+LAYER 0 NEURON 4 has 4 connections to LAYER 1:
+-> Connection to NEURON 0 in LAYER 1 has a WEIGHT of 0.625992 (41025)
+-> Connection to NEURON 1 in LAYER 1 has a WEIGHT of 0.655518 (42960)
+-> Connection to NEURON 2 in LAYER 1 has a WEIGHT of -0.203857 (-13360)
+-> Connection to NEURON 3 in LAYER 1 has a WEIGHT of -1.640106 (-107486)
+LAYER 0 has a BIAS NEURON with 4 connections
+-> Connection to NEURON 0 in LAYER 1 has a WEIGHT of 0.774811 (50778)
+-> Connection to NEURON 1 in LAYER 1 has a WEIGHT of -2.804977 (-183827)
+-> Connection to NEURON 2 in LAYER 1 has a WEIGHT of 1.136185 (74461)
+-> Connection to NEURON 3 in LAYER 1 has a WEIGHT of -2.126068 (-139334)
+
+<============ Listing LAYER 1 ============>
+
+LAYER 1 NEURON 0 has 2 connections to LAYER 2:
+-> Connection to NEURON 0 in LAYER 2 has a WEIGHT of 2.001389 (131163)
+-> Connection to NEURON 1 in LAYER 2 has a WEIGHT of 1.939072 (127079)
+LAYER 1 NEURON 1 has 2 connections to LAYER 2:
+-> Connection to NEURON 0 in LAYER 2 has a WEIGHT of 0.072983 (4783)
+-> Connection to NEURON 1 in LAYER 2 has a WEIGHT of -2.233963 (-146405)
+LAYER 1 NEURON 2 has 2 connections to LAYER 2:
+-> Connection to NEURON 0 in LAYER 2 has a WEIGHT of 2.024338 (132667)
+-> Connection to NEURON 1 in LAYER 2 has a WEIGHT of 1.912186 (125317)
+LAYER 1 NEURON 3 has 2 connections to LAYER 2:
+-> Connection to NEURON 0 in LAYER 2 has a WEIGHT of -1.757050 (-115150)
+-> Connection to NEURON 1 in LAYER 2 has a WEIGHT of 0.860306 (56381)
+LAYER 1 has a BIAS NEURON with 2 connections
+-> Connection to NEURON 0 in LAYER 2 has a WEIGHT of 0.422989 (27721)
+-> Connection to NEURON 1 in LAYER 2 has a WEIGHT of 0.657669 (43101)

@@ -1,0 +1,57 @@
+module aibro:
+
+% data handling declarations
+procedure doTrainTick()();  % ANN training function for the neural networks in C
+
+procedure runFrontSensors()(integer, integer, integer);  % runs neural network A in C
+procedure runSideSensors()(integer, integer, integer, integer);  % runs neural network B in C
+procedure runDecision()();  % runs neural network C in C
+
+function getAction(): integer;  % retrieves best action in C
+
+% interface declarations
+input start, A, B;
+input front1: integer, front2: integer, front3: integer;
+input side1: integer, side2: integer, side3: integer, side4: integer;
+output O: integer;
+
+% signals
+
+[
+% training thread
+loop
+	pause;
+	call doTrainTick()();
+end loop
+]
+
+||
+
+[
+% main thread
+var out: integer in
+	loop
+		pause;
+		[
+			await A;
+			% run ANN A: interpret frontal scanner data
+			call runFrontSensors()(?front1, ?front2, ?front3);
+			||
+
+			await B;
+			%run ANN B: interpret side scanner data
+			call runSideSensors()(?side1, ?side2, ?side3, ?side4);
+		];
+
+		% run ANN C: decide on best course of action using interpretted input from A and B
+		call runDecision()();
+
+		% fetch output action
+		out := getAction();
+
+		emit O(out);
+	end loop
+end var
+]
+
+end module

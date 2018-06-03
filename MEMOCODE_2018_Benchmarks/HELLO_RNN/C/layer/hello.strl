@@ -1,0 +1,41 @@
+module hello:
+
+% data handling declarations
+procedure runLetterLayer1()(integer, integer, integer, integer);
+procedure runLetterLayer2()();
+
+function getLetter(): integer;
+
+% interface declarations
+input bit1: integer, bit2: integer, bit3: integer, bit4: integer;
+output letter: integer;
+
+% signals
+
+[
+% main thread
+var out: integer in
+	loop
+		pause;
+		[
+			await bit1;
+			||
+			await bit2;
+			||
+			await bit3;
+			||
+			await bit4;
+		];
+
+		call runLetterLayer1()(?bit1, ?bit2, ?bit3, ?bit4);
+
+		await tick;
+
+		call runLetterLayer2()();
+
+		emit letter(getLetter());
+	end loop
+end var
+]
+
+end module

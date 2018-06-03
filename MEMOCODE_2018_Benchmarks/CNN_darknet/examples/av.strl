@@ -1,0 +1,13 @@
+module av:
+
+procedure runCNN()();
+
+input scan;
+
+loop
+    await scan;
+
+    call runCNN()();
+end loop
+
+end module

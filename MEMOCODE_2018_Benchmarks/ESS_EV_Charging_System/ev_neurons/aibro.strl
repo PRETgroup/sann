@@ -1,0 +1,261 @@
+%%%%%%%%%%%%%%%%%%%%%%  ANN A MODULES %%%%%%%%%%%%%%%%%%%%%%%%%
+
+% layer module for ANN A, all layers have 3 neurons
+module layerA:
+function activate3(integer, integer, integer, integer, integer, integer, integer): integer;
+procedure debug()(integer);
+
+% interface declarations
+input network: integer, layer: integer, activation: integer;
+input input1: integer, input2: integer, input3: integer;
+output output1: integer, output2: integer, output3: integer;
+
+[
+	% layer run thread
+	emit output1(activate3(?input1, ?input2, ?input3, ?network, ?layer, 0, ?activation));
+	||
+	emit output2(activate3(?input1, ?input2, ?input3, ?network, ?layer, 1, ?activation));
+	|| 
+	emit output3(activate3(?input1, ?input2, ?input3, ?network, ?layer, 2, ?activation));
+]
+
+end module
+
+% ANN A network module
+module networkA:
+procedure debug()(integer);
+
+% interface declaration
+input input1: integer, input2: integer, input3: integer;
+output output1: integer, output2: integer, output3: integer;
+
+% signal declaration
+signal layer1: integer, layer2: integer, activation: integer, network: integer,
+output21: integer, output22: integer, output23: integer in
+
+[	
+	emit layer1(1);
+	emit activation(1);
+	emit network(0);
+	run layerA[signal network/network, layer1/layer, activation/activation, input1/input1, input2/input2, input3/input3, 
+	output21/output1, output22/output2, output23/output3];
+
+	await tick;
+
+	emit layer2(2);
+	emit activation(1);
+	emit network(0);
+	run layerA[signal network/network, layer2/layer, activation/activation, output21/input1, output22/input2, output23/input3, 
+	output1/output1, output2/output2, output3/output3];
+]
+
+end signal
+end module
+
+%%%%%%%%%%%%%%%%%%%%%%  ANN B MODULES %%%%%%%%%%%%%%%%%%%%%%%%%
+
+% First layer module for ANN B (hidden layer)
+module layerB1:
+function activate4(integer, integer, integer, integer, integer, integer, integer, integer): integer;
+procedure debug()(integer);
+
+% interface declarations
+input network: integer, layer: integer, activation: integer;
+input input1: integer, input2: integer, input3: integer, input4: integer;
+output output1: integer, output2: integer, output3: integer;
+
+[
+	% layer run thread
+	emit output1(activate4(?input1, ?input2, ?input3, ?input4, ?network, ?layer, 0, ?activation));
+	||
+	emit output2(activate4(?input1, ?input2, ?input3, ?input4, ?network, ?layer, 1, ?activation));
+	|| 
+	emit output3(activate4(?input1, ?input2, ?input3, ?input4, ?network, ?layer, 2, ?activation));
+]
+
+end module
+
+% Second layer module for ANN B (output layer)
+module layerB2:
+function activate3(integer, integer, integer, integer, integer, integer, integer): integer;
+procedure debug()(integer);
+
+% interface declarations
+input network: integer, layer: integer, activation: integer;
+input input1: integer, input2: integer, input3: integer;
+output output1: integer, output2: integer;
+
+[
+	% layer run thread
+	emit output1(activate3(?input1, ?input2, ?input3, ?network, ?layer, 0, ?activation));
+	||
+	emit output2(activate3(?input1, ?input2, ?input3, ?network, ?layer, 1, ?activation))
+]
+
+end module
+
+% ANN B network module
+module networkB:
+procedure debug()(integer);
+
+% interface declaration
+input input1: integer, input2: integer, input3: integer, input4: integer;
+output output1: integer, output2: integer;
+
+% signal declaration
+signal layer1: integer, layer2: integer, activation: integer, network: integer,
+output21: integer, output22: integer, output23: integer in
+
+[	
+	emit layer1(1);
+	emit activation(1);
+	emit network(1);
+	run layerB1[signal network/network, layer1/layer, activation/activation, input1/input1, input2/input2, input3/input3, input4/input4, 
+	output21/output1, output22/output2, output23/output3];
+
+	await tick;
+
+	emit layer2(2);
+	emit activation(1);
+	emit network(1);
+	run layerB2[signal network/network, layer2/layer, activation/activation, output21/input1, output22/input2, output23/input3, 
+	output1/output1, output2/output2];
+]
+
+end signal
+end module
+
+%%%%%%%%%%%%%%%%%%%%%%  ANN C MODULES %%%%%%%%%%%%%%%%%%%%%%%%%
+
+% First layer module for ANN C (hidden layer)
+module layerC1:
+function activate5(integer, integer, integer, integer, integer, integer, integer, integer, integer): integer;
+procedure debug()(integer);
+
+% interface declarations
+input network: integer, layer: integer, activation: integer;
+input input1: integer, input2: integer, input3: integer, input4: integer, input5: integer;
+output output1: integer, output2: integer, output3: integer, output4: integer;
+
+[
+	% layer run thread
+	emit output1(activate5(?input1, ?input2, ?input3, ?input4, ?input5, ?network, ?layer, 0, ?activation));
+	||
+	emit output2(activate5(?input1, ?input2, ?input3, ?input4, ?input5, ?network, ?layer, 1, ?activation));
+	|| 
+	emit output3(activate5(?input1, ?input2, ?input3, ?input4, ?input5, ?network, ?layer, 2, ?activation));
+	|| 
+	emit output4(activate5(?input1, ?input2, ?input3, ?input4, ?input5, ?network, ?layer, 3, ?activation));
+]
+
+end module
+
+% Second layer module for ANN C (output layer)
+module layerC2:
+function activate4(integer, integer, integer, integer, integer, integer, integer, integer): integer;
+procedure debug()(integer);
+
+% interface declarations
+input network: integer, layer: integer, activation: integer;
+input input1: integer, input2: integer, input3: integer, input4: integer;
+output output1: integer, output2: integer;
+
+[
+	% layer run thread
+	emit output1(activate4(?input1, ?input2, ?input3, ?input4, ?network, ?layer, 0, ?activation));
+	||
+	emit output2(activate4(?input1, ?input2, ?input3, ?input4, ?network, ?layer, 1, ?activation))
+]
+
+end module
+
+% ANN C network module
+module networkC:
+procedure debug()(integer);
+
+% interface declaration
+input input1: integer, input2: integer, input3: integer, input4: integer, input5: integer;
+output output1: integer, output2: integer;
+
+% signal declaration
+signal layer1: integer, layer2: integer, activation: integer, network: integer,
+output21: integer, output22: integer, output23: integer, output24: integer in
+
+[	
+	emit layer1(1);
+	emit activation(1);
+	emit network(2);
+	run layerC1[signal network/network, layer1/layer, activation/activation, input1/input1, input2/input2, input3/input3, input4/input4, input5/input5, 
+	output21/output1, output22/output2, output23/output3, output24/output4];
+
+	await tick;
+
+	emit layer2(2);
+	emit activation(1);
+	emit network(2);
+	run layerC2[signal network/network, layer2/layer, activation/activation, output21/input1, output22/input2, output23/input3, output24/input4, 
+	output1/output1, output2/output2];
+]
+
+end signal
+end module
+
+%%%%%%%%%%%%%%%%%%%%%%  AIBRO MODULES %%%%%%%%%%%%%%%%%%%%%%%%%
+
+module aibro:
+
+% data handling declarations
+
+function getAction(): integer;  % retrieves best action in C
+
+% interface declarations
+input A, B;
+input front1: integer, front2: integer, front3: integer;
+input side1: integer, side2: integer, side3: integer, side4: integer;
+
+output outA1: integer, outA2: integer, outA3: integer, outB1: integer, outB2: integer, outC: integer;
+
+% signals
+signal tempA1: integer, tempA2: integer, tempA3: integer, tempB1: integer, tempB2: integer, tempC1: integer, tempC2: integer in
+
+[
+% main thread
+var out: integer in
+	loop
+		pause;
+		out := 0;
+		[
+			await A;
+			% run ANN A: interpret frontal scanner data
+			run networkA[signal front1/input1, front2/input2, front3/input3, tempA1/output1, tempA2/output2, tempA3/output3];
+			||
+
+			await B;
+			%run ANN B: interpret side scanner data
+			run networkB[signal side1/input1, side2/input2, side3/input3, side4/input4, tempB1/output1, tempB2/output2];
+		];
+
+		%emit outA1(?tempA1);
+		%emit outA2(?tempA2);
+		%emit outA3(?tempA3);
+
+		%emit outB1(?tempB1);
+		%emit outB2(?tempB2);
+
+		% run ANN C: decide on best course of action using interpretted input from A and B
+		run networkC[signal tempA1/input1, tempA2/input2, tempA3/input3, tempB1/input4, tempB2/input5, tempC1/output1, tempC2/output2];
+
+		if(?tempC1 > 0) then
+			out := out + 2;
+		end if;
+		if(?tempC2 > 0) then
+			out := out + 1;
+		end if;
+
+		emit outC(out);
+	end loop
+end var
+]
+
+end signal
+end module

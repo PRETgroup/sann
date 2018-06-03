@@ -1,0 +1,13 @@
+module adder:
+
+function add(integer, integer): integer;
+
+input add, num1: integer, num2: integer;
+output sum: integer;
+
+loop
+	await add;
+	emit sum(add(?num1, ?num2));
+end loop
+
+end module

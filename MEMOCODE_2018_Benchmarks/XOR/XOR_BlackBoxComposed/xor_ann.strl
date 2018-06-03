@@ -1,0 +1,21 @@
+module xor_ann:
+
+%declarations of data-handling functions in C
+function run_XOR_ANN(float, float): float;
+
+%interface declarations
+input x1: float, x2: float, x3: float, x4: float;
+output y: float;
+signal y1_tmp: float, y2_tmp: float in
+    loop
+        [
+            emit y1_tmp(run_XOR_ANN(?x1, ?x2));
+        ] || [
+            emit y2_tmp(run_XOR_ANN(?x3, ?x4));
+        ];
+        emit y(run_XOR_ANN(?y1_tmp, ?y2_tmp));
+        pause;
+    end
+end signal
+
+end module

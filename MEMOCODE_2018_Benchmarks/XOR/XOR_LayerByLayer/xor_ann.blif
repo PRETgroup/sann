@@ -1,0 +1,57 @@
+# BLIF generated from network
+# nb of inputs  2
+# nb of outputs 9
+# nb of latches 4
+
+.model xor_ann_25
+.inputs x1__I_xxx_0 x2__I_xxx_0 
+.outputs y__O_xxx_0 ACT_2_0_xxx_0_0_2_0 ACT_5_0_xxx_0_0_5_0 ACT_7_0_xxx_0_0_7_0 ROOT_K0_xxx_0 ROOT_K1_xxx_0 ACT_8_0_xxx_0_0_8_0 \
+ ACT_9_0_xxx_0_0_9_0 ACT_10_0_xxx_0_0_10_0 
+.latch in_BOOT_REGISTER_0_0_0_xxx_0 BOOT_REGISTER_xxx_0 1
+.latch in_PAUSE_REG_3_0_0_0_xxx_0 PAUSE_REG_3_xxx_0 0
+.latch in_PAUSE_REG_5_0_0_0_xxx_0 PAUSE_REG_5_xxx_0 0
+.latch in_PAUSE_REG_9_0_0_0_xxx_0 PAUSE_REG_9_xxx_0 0
+.names x1__I_xxx_0 BOOT_REGISTER_xxx_0 AUX_ACT_2_xxx_0
+01 1
+.names AUX_ACT_2_xxx_0 ACT_2_0_xxx_0_0_2_0
+1 1
+.names x2__I_xxx_0 BOOT_REGISTER_xxx_0 AUX_ACT_5_xxx_0
+01 1
+.names AUX_ACT_5_xxx_0 ACT_5_0_xxx_0_0_5_0
+1 1
+.names BOOT_REGISTER_xxx_0 ACT_7_0_xxx_0_0_7_0
+1 1
+.names ROOT_K0_xxx_0
+0
+.names CONT_5_xxx_0 GO_1_xxx_0 CONT_3_xxx_0 AUX_K1_xxx_0
+--1 1
+-1- 1
+1-- 1
+.names AUX_K1_xxx_0 ROOT_K1_xxx_0
+1 1
+.names BOOT_REGISTER_xxx_0 CONT_9_xxx_0 GO_1_xxx_0
+-1 1
+1- 1
+.names GO_1_xxx_0 ACT_8_0_xxx_0_0_8_0
+1 1
+.names BOOT_REGISTER_xxx_0 PAUSE_REG_3_xxx_0 CONT_3_xxx_0
+01 1
+.names CONT_3_xxx_0 ACT_9_0_xxx_0_0_9_0
+1 1
+.names BOOT_REGISTER_xxx_0 PAUSE_REG_5_xxx_0 CONT_5_xxx_0
+01 1
+.names CONT_5_xxx_0 ACT_10_0_xxx_0_0_10_0
+1 1
+.names BOOT_REGISTER_xxx_0 PAUSE_REG_9_xxx_0 CONT_9_xxx_0
+01 1
+.names CONT_5_xxx_0 y__O_xxx_0
+1 1
+.names in_BOOT_REGISTER_0_0_0_xxx_0
+0
+.names GO_1_xxx_0 in_PAUSE_REG_3_0_0_0_xxx_0
+1 1
+.names CONT_3_xxx_0 in_PAUSE_REG_5_0_0_0_xxx_0
+1 1
+.names CONT_5_xxx_0 in_PAUSE_REG_9_0_0_0_xxx_0
+1 1
+.end

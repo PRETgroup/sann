@@ -1,0 +1,15 @@
+module xor_ann:
+
+%external functions
+function run_XOR_ANN(float, float): float;
+
+%interface
+input x1: float, x2: float;
+output y: float;
+
+loop
+    emit y(run_XOR_ANN(?x1, ?x2));
+    pause;
+end
+
+end module

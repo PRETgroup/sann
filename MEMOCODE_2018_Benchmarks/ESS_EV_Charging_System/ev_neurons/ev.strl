@@ -1,0 +1,46 @@
+module ev:
+
+% data handling declarations
+procedure predictPrice()();
+procedure predictDemand()();
+procedure runQValues()(float, float);
+function systemUpdate(): float;
+
+% interface declarations
+input price: float, demand: float;
+output watts: float;
+
+loop
+    pause;
+    [
+        call predictPrice()();
+        ||
+        call predictDemand()();
+    ];
+
+    call runQValues()(?price, ?demand);
+
+    emit watts(systemUpdate());
+end loop
+
+end module
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

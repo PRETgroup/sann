@@ -1,0 +1,165 @@
+module playgame:
+
+% data handling declarations
+procedure init()();
+procedure rabbit_decide()();
+procedure wolf1_decide()();
+procedure wolf2_decide()();
+
+procedure rabbit_move()();
+procedure wolf1_move()();
+procedure wolf2_move()();
+
+function check_score(): boolean;
+
+% interface declarations
+input start;
+
+signal start_round, r_decide, w1_decide, w2_decide, done_decide, r_moved, w1_moved, w2_moved, done_rabbit, done_wolf1, done_wolf2 in
+
+trap T_MAIN in
+
+[
+% initialization thread
+trap T in
+	loop
+		pause;
+		present start then
+			call init()();
+			emit start_round;
+			exit T;
+		end present
+	end loop
+end trap
+]
+
+||
+
+[
+% rabbit decision thread
+loop
+	await pre(start_round);
+	call rabbit_decide()();
+	emit r_decide;
+end loop
+]
+
+||
+
+[
+% wolf1 decision thread
+loop
+	await pre(start_round);
+	call wolf1_decide()();
+	emit w1_decide;
+end loop
+]
+
+||
+
+[
+% wolf2 decision thread
+loop
+	await pre(start_round);
+	call wolf2_decide()();
+	emit w2_decide;
+end loop
+]
+
+||
+
+[
+% wait for animals to finish running
+loop
+	[
+		await r_decide
+		||
+		await w1_decide
+		||
+		await w2_decide
+	];
+	emit done_decide;
+end loop
+]
+
+||
+
+[
+% rabbit move thread
+loop
+	await pre(done_decide);
+	call rabbit_move()();
+	emit r_moved;
+end loop
+]
+
+||
+
+[
+% wolf 1 move thread
+loop
+	await done_rabbit;
+	call wolf1_move()();
+	emit w1_moved;
+end loop
+]
+
+||
+
+[
+% wolf 2 move thread
+loop
+	await done_wolf1;
+	call wolf2_move()();
+	emit w2_moved;
+end loop
+]
+
+||
+
+[
+% rabbit score checking thread
+loop
+	await r_moved;
+	if check_score() then
+		exit T_MAIN;
+	else
+		emit done_rabbit;
+	end if;
+end loop
+]
+
+||
+
+[
+% wolf 1 score checking thread
+loop
+	await w1_moved;
+	if check_score() then
+		exit T_MAIN;
+	else
+		emit done_wolf1;
+	end if;
+end loop
+]
+
+||
+
+[
+% wolf 2 score checking thread
+loop
+	await w2_moved;
+	if check_score() then
+		exit T_MAIN;
+	else
+		emit start_round;
+	end if;
+end loop
+]
+
+
+end trap
+
+end signal
+
+end module

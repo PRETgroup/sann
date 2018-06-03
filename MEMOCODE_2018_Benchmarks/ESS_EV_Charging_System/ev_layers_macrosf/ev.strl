@@ -1,0 +1,55 @@
+module ev:
+
+% data handling declarations
+procedure predictPriceLayer1()();
+procedure predictPriceLayer2()();
+procedure predictDemandLayer1()();
+procedure predictDemandLayer2()();
+procedure runQLayer1()(float, float);
+procedure runQLayer2()();
+function systemUpdate(): float;
+
+% interface declarations
+input price: float, demand: float;
+output watts: float;
+
+loop
+    pause;
+    [
+        call predictPriceLayer1()();
+        await tick;
+        call predictPriceLayer2()();
+        ||
+        call predictDemandLayer1()();
+        await tick;
+        call predictDemandLayer2()();
+    ];
+
+    call runQLayer1()(?price, ?demand);
+    await tick;
+    call runQLayer2()();
+
+    emit watts(systemUpdate());
+end loop
+
+end module
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

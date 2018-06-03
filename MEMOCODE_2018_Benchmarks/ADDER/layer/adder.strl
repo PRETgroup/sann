@@ -1,0 +1,18 @@
+module adder:
+
+procedure addLayer1()(integer, integer);
+function addLayer2(): integer;
+
+input add, num1: integer, num2: integer;
+output sum: integer;
+
+loop
+	await add;
+	call addLayer1()(?num1, ?num2);
+
+	await tick;
+
+	emit sum(addLayer2());
+end loop
+
+end module
